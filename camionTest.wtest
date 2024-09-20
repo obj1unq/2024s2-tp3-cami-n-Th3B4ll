@@ -1,0 +1,19 @@
+import camion.*
+import cosas.*
+
+describe "Camion" {
+  test "Testeos del camion" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteLadrillos)
+    assert.equals(#{knightRider, bumblebee, paqueteLadrillos}, camion.cosas())
+    
+    assert.that(camion.todoPesoPar())
+    assert.that(camion.hayAlgunoQuePesa(800))
+    assert.equals(2324, camion.pesoTotal())
+    assert.notThat(camion.excedidoDePeso())
+    assert.equals(#{knightRider, bumblebee},camion.objetosQueSuperanPeligrosidad(9))
+    assert.equals(#{bumblebee},camion.objetosMasPeligrososQue(knightRider) )
+    camion.puedeCircularEnRuta(10)
+  }
+}
