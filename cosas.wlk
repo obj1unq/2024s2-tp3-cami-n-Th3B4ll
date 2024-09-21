@@ -1,3 +1,4 @@
+import camion.*
 object knightRider {
 	method peso() { return 500 }
 	method nivelPeligrosidad() { return 10 }
@@ -36,7 +37,7 @@ object arena {
 }
 
 object bateriaAntiaerea {
-	var property armamento = misiles
+	var property armamento = otraMunicion
 
 	method peso() { 
 		return armamento.peso() 
@@ -53,7 +54,7 @@ object misiles {
 	method valorBulto() {return 2}
 }
 
-object otroMunicion {
+object otraMunicion {
 	method peso() { return 200 }
 	method peligrosidad() { return 0 }
 	method valorBulto() {return 1}  
@@ -100,5 +101,33 @@ object embalajeDeSeguridad {
 	method consecuencia(){}
 }
 
+object almacen {
+	const capMax = 3
+	var bodega = #{}
+	method descargo(cosas) {
+		if(cosas.map{cosa => cosa.bulto()}.sum() <= self.lugaresLibres())
+			bodega.addAll(cosas)
+			camion.cosas().clear()
+	}
+/*	method lugaresLibres() {
+		return if(hayLugar()) cosas.{cosa => cosa.bulto()}.sum() 
+				else self.noPuedeTransportarse()
+				
+	} */
+/*	method hayLugar() {*/
+/*		return size(bodega) < 3*/
+/*	}*/
+/*		return (size(bodega) < 3)
+	method hayLugar() {
+	}*/
+}
 
+object ruta9 {
+	const pesoSoportado = 2500
+	method nivelDePeligrosidad(){return 11}  
+}
+object caminosVecinales {
+	var property pesoSoportado = 2500
 
+	method nivDePeligrosidad(){ return 0}
+}

@@ -14,6 +14,49 @@ describe "Camion" {
     assert.notThat(camion.excedidoDePeso())
     assert.equals(#{knightRider, bumblebee},camion.objetosQueSuperanPeligrosidad(9))
     assert.equals(#{bumblebee},camion.objetosMasPeligrososQue(knightRider) )
-    camion.puedeCircularEnRuta(10)
+    assert.notThat(camion.puedeCircularEnRuta(10))
   }
+
+  test "Agregados al camion" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteLadrillos)
+
+    assert.that(camion.tieneAlgoQuePesaEntre(450, 900))
+    assert.equals(bumblebee, camion.cosaMasPesada())
+    assert.equals([500, 800, 24], camion.pesos())
+    assert.equals(4,camion.totalBultos())
+  }
+
+  test "Consecuencias de carga" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteLadrillos)
+    
+    /* Bumblebee: pasa a robot; */
+    assert.equals(robot,bumblebee.forma())
+    /* paquete de ladrillos: agrega 12 ladrillos; */
+    assert.equals(12, paqueteLadrillos.cantidad())
+    /* arena a granel: agrega 20 kilos;*/
+    camion.cargar(arena)
+    assert.equals(20, arena.kilos())
+    /* batería antiaérea: carga misiles;*/
+    assert.equals(otraMunicion,bateriaAntiaerea.armamento())
+    camion.cargar(bateriaAntiaerea)
+    assert.equals(misiles,bateriaAntiaerea.armamento())
+    /* contenedor portuario: hace que reaccione cada una de las cosas que tiene adentro; */
+    contenedor.cosas()
+    camion.cargar(contenedor)
+    /* residuos radioactivos: agrega 15 kilos;*/
+    camion.cargar(contenedor)
+  }
+
+  test "Transporte" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    almacen.cosas(arena)
+    camion.transportar(almacen, camino)
+  }
+
+
 }

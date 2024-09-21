@@ -23,7 +23,7 @@ object camion {
 		return self.cosas().any({cosa => cosa.nivelPeligrosidad() == nivel})
 	}
 	method pesoTotal() {
-		var peso = 0
+		const peso = 0
 		const tara = 1000
 		return tara + self.cosas().sum({cosa=> cosa.peso()})
 	}
@@ -43,12 +43,12 @@ object camion {
 		return self.cosas().all{cosa => cosa.nivelPeligrosidad() <= nivel}
 	}
 	method tieneAlgoQuePesaEntre(min, max) {
-		return self.losQuePesanMas(min) && self.losQuePesanMenos(max)   
+		return self.hayQuePesanMas(min) && self.hayQuePesanMenos(max)   
 	}
-	method losQuePesanMenos(max) {
-		return self.cosas().any({cosa=> cosa.peso() > max})
+	method hayQuePesanMenos(max) {
+		return self.cosas().any({cosa=> cosa.peso() < max})
 	}
-	method losQuePesanMas(min) {
+	method hayQuePesanMas(min) {
 		return self.cosas().any({cosa=> cosa.peso() > min})
 	}
 	method cosaMasPesada() {
@@ -58,10 +58,17 @@ object camion {
 		return self.cosas().map{cosa => cosa.peso()}
 	}
 	method totalBultos(){
-		return self.cosas(){cosa => cosa.bulto()}.sum()
+		return self.cosas().map{cosa => cosa.bulto()}.sum()
 	}
 
-	method transportar() {
-	  
+	method transportar(destino, camino) {
+		if(self.excedidoDePeso()) {
+			self.noPuedeTransportarse() 
+		}
+		else destino.descargo(self.cosas())
 	}
+
+	method noPuedeTransportarse() {
+		return	"El transporte no es posible realizar lo"
+	} 
 }

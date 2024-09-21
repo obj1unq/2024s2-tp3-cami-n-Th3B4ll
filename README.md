@@ -37,10 +37,12 @@ Se pide agregar estos mensajes al camión:
 * `pesos()`: devuelve una lista con _los pesos_ de cada cosa que tiene el camión.
 * `totalBultos()`: la suma de la cantidad de bultos que está transportando. KnightRider, arena a granel y residuos radioactivos son 1 bulto. 
 Bumblebee y embalaje de seguridad son dos. 
+
 Paquete de ladrillos es :
 	1 hasta 100 ladrillos, 
 	2 de 101 a 300, 
 	3 301 o más. 
+
 Batería antiaérea: 
 	1 si no tiene misiles, 
 	2 si tiene. 
@@ -61,24 +63,27 @@ Agregar la posibilidad de que al cargar una cosa en el camión, esta pueda sufri
 ## Transporte.
 
 El camión de transporte transporta los elementos al almacén. Al llegar al almacén, todas las cosas que están en el camión pasan al almacén: 
-Por ejemplo, si el camión tiene a knigth Rider y a Bumblebee, mientras que  el almacén está la arena a granel, cuando el camión 
-llega éste queda vacío y en el almacén quedan bumblebee, arena a grandel y Knigth Rider.
+
+Por ejemplo, si el camión tiene a knigth Rider y a Bumblebee, mientras que  el almacén está la arena a granel, cuando el camión llega éste queda vacío y en el almacén quedan bumblebee, arena a grandel y Knigth Rider.
 
 El viaje puede ser por la ruta 9 o por caminos vecinales. Esta elección se hace al momento de realizar el transporte.
 
 Para que el transporte pueda ser realizado debe cumplirse con las siguientes condiciones:
 
 * El camión no tiene que estar excedido de peso
-* El almacén tiene una cantidad de bultos máximos que no puede superar. Por ejemplo, si contiene arena a granel (1 bulto), el máximo de bultos
-del almacén se configura en 3, y el camión contiene a Bumblebee y Knight Rider (3 bultos), entonces no se puede transportar.
+
+* El almacén tiene una cantidad de bultos máximos que no puede superar. 
+Por ejemplo, si contiene arena a granel (1 bulto), el máximo de bultos del almacén se configura en 3, y el camión contiene a Bumblebee y Knight Rider 
+(3 bultos), entonces no se puede transportar.
+
 * El camino soporte el viaje:
-	* El nivel de peligrosidad de la ruta 9 es 11, solo se puede usar la ruta 9 en los casos en "puedaCircularEnRuta" del punto 1
+	* El nivel de peligrosidad de la ruta 9 es 11,
+	solo se puede usar la ruta 9 en los casos en "puedaCircularEnRuta" del punto 1
+
 	* Los caminos vecinales tienen un peso máximo soportado que es configurable. El peso total del camión no puede ser superior al peso tolerado
 
 
-Se pide que el camión entienda el mensaje `transportar(destino, camino)` Donde destino es el almacén (pero se parametriza porque podría
-aparecer otros lugares) y el camino es una de las dos opciones (ruta 9 o caminos vecinales, pero también se debe pensar que pueda haber otros caminos
-polimórficos.
+Se pide que el camión entienda el mensaje `transportar(destino, camino)` Donde destino es el almacén (pero se parametriza porque podría aparecer otros lugares) y el camino es una de las dos opciones ruta 9 o caminos vecinales, pero también se debe pensar que pueda haber otros caminos polimórficos.
 
 Es importante realizar las validaciones correspondientes.
 
