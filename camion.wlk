@@ -61,14 +61,15 @@ object camion {
 		return self.cosas().map{cosa => cosa.bulto()}.sum()
 	}
 
-	method transportar(destino, camino) {
-		if(self.excedidoDePeso()) {
-			self.noPuedeTransportarse() 
-		}
-		else destino.descargo(self.cosas())
-	}
-
-	method noPuedeTransportarse() {
-		return	"El transporte no es posible realizar lo"
-	} 
+// 	method transportar(destino, camino) {
+// 		if(self.excedidoDePeso()) {
+// 			self.noPuedeTransportarse() 
+// 		} else if(destino.hayLugar() >= self.totalBultos()) {
+// 			destino.descargo(self.cosas()) 
+// 			}
+// 	}
+// 
+// 	method noPuedeTransportarse() {
+// 		return	"El transporte no es posible realizar lo"
+// 	} 
 }

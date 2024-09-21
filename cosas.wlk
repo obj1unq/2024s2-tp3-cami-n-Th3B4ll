@@ -103,27 +103,22 @@ object embalajeDeSeguridad {
 
 object almacen {
 	const capMax = 3
-	var bodega = #{}
+	var property bodega = #{}
 	method descargo(cosas) {
-		if(cosas.map{cosa => cosa.bulto()}.sum() <= self.lugaresLibres())
 			bodega.addAll(cosas)
 			camion.cosas().clear()
 	}
-/*	method lugaresLibres() {
-		return if(hayLugar()) cosas.{cosa => cosa.bulto()}.sum() 
-				else self.noPuedeTransportarse()
-				
-	} */
-/*	method hayLugar() {*/
-/*		return size(bodega) < 3*/
-/*	}*/
-/*		return (size(bodega) < 3)
+
 	method hayLugar() {
-	}*/
+		return self.bodega().map{cosa => cosa.bulto()}.sum() < capMax 
+	}
+/*	method quedaUnLugar(){ */
+/*		return bodega.map{cosa => cosa.bulto()}.sum() == 2 */
+/*	} */
 }
 
 object ruta9 {
-	const pesoSoportado = 2500
+	// const pesoSoportado = 2500
 	method nivelDePeligrosidad(){return 11}  
 }
 object caminosVecinales {
