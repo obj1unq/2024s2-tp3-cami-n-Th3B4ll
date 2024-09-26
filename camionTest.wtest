@@ -51,13 +51,13 @@ describe "Camion" {
     camion.cargar(contenedor)
   }
 
-  // test "Transporte" {
-  //   camion.cargar(knightRider)
-  //   camion.cargar(bumblebee)
-  //   almacen.bodega(arena)
-  //   camion.transportar(almacen, ruta9)
-  //   assert.equals(#{knightRider,bumblebee}, camion.cosas())
-  // }
+  test "Transporte" {
+    camion.cargar(knightRider)
+    camion.cargar(bumblebee)
+    almacen.almacenar.add(arena)
+    camion.transportar(almacen, ruta9)
+    assert.equals(#{knightRider,bumblebee}, camion.cosas())
+  }
 
 
 }

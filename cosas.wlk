@@ -89,6 +89,10 @@ object residuosRadioactivos {
 	method consecuencia(){ peso += peso 15}
 }
 
+class Embalaje {
+
+
+}
 object embalajeDeSeguridad {
 	var cosa = residuosRadioactivos
 	method cosaParaEmbalar(_cosa){
@@ -103,14 +107,15 @@ object embalajeDeSeguridad {
 
 object almacen {
 	const capMax = 3
-	var property bodega = #{}
-	method descargo(cosas) {
-			bodega.addAll(cosas)
+	const property almacenar = #{}
+	method descargo() {
+			
+			camion.descargar(cosas)
 			camion.cosas().clear()
 	}
 
 	method hayLugar() {
-		return self.bodega().map{cosa => cosa.bulto()}.sum() < capMax 
+		return self.almacenar().map{cosa => cosa.bulto()}.sum() < capMax 
 	}
 /*	method quedaUnLugar(){ */
 /*		return bodega.map{cosa => cosa.bulto()}.sum() == 2 */

@@ -2,16 +2,15 @@ import cosas.*
 
 object camion {
 	const property cosas = #{}
-	var bultos = 0
-		
+			
 	method cargar(unaCosa) {
 		cosas.add(unaCosa)
-		bultos += unaCosa.bulto()
 		unaCosa.consecuencia()	
 	}
 	method descargar(cosa) {
-		cosas.remove(cosa)
-		bultos -= 1 	
+		cosas.remove(cosa) }
+	method cantDeBultos() {
+		return self.cosas().sum({cosa => cosa.bulto()})
 	}
 	method todoPesoPar() {
 		return self.cosas().all({ cosa => cosa.peso().even()})
@@ -23,13 +22,18 @@ object camion {
 		return self.cosas().any({cosa => cosa.nivelPeligrosidad() == nivel})
 	}
 	method pesoTotal() {
-		const peso = 0
-		const tara = 1000
-		return tara + self.cosas().sum({cosa=> cosa.peso()})
+		return self.tara() + self.pesoDeLasCosas()
 	}
+	method tara() { return 1000 }
+	
+	method pesoDeLasCosas() {
+		return self.cosas().sum({cosa=> cosa.peso()}) }
+
 	method excedidoDePeso() {
-		return self.pesoTotal() > 2500
-	}
+		return self.pesoTotal() > self.pesoMaximo() }
+
+	method pesoMaximo() { return 2500 }
+
 	method objetosQueSuperanPeligrosidad(nivel) {
 		return self.cosas().filter({cosa=> cosa.nivelPeligrosidad() > nivel})
 	}
@@ -43,14 +47,9 @@ object camion {
 		return self.cosas().all{cosa => cosa.nivelPeligrosidad() <= nivel}
 	}
 	method tieneAlgoQuePesaEntre(min, max) {
-		return self.hayQuePesanMas(min) && self.hayQuePesanMenos(max)   
+		return self.cosas().any({cosa => cosa.peso().between(min, max)})
 	}
-	method hayQuePesanMenos(max) {
-		return self.cosas().any({cosa=> cosa.peso() < max})
-	}
-	method hayQuePesanMas(min) {
-		return self.cosas().any({cosa=> cosa.peso() > min})
-	}
+
 	method cosaMasPesada() {
 		return self.cosas().max{cosa => cosa.peso()}
 	}
@@ -60,16 +59,27 @@ object camion {
 	method totalBultos(){
 		return self.cosas().map{cosa => cosa.bulto()}.sum()
 	}
+ 	method transportar(destino, camino) {
+		
+		if( self.puedoTransportar(destino, camino)) {
 
-// 	method transportar(destino, camino) {
-// 		if(self.excedidoDePeso()) {
-// 			self.noPuedeTransportarse() 
-// 		} else if(destino.hayLugar() >= self.totalBultos()) {
-// 			destino.descargo(self.cosas()) 
-// 			}
-// 	}
-// 
-// 	method noPuedeTransportarse() {
-// 		return	"El transporte no es posible realizar lo"
-// 	} 
+		} else {
+
+		}
+
+ 	}
+	
+	method puedoTransportar(destino, camino) {
+		return if(self.excedidoDePeso()) {
+ 					self.noPuedeTransportarse() 
+ 				} else if(destino.hayLugar() >= self.totalBultos()) {
+ 					destino.descargo(self) 
+ 				}
+
+	}
+
+
+ 	method noPuedeTransportarse() {
+ 		return	"El transporte no es posible realizar lo"
+ 	} 
 }
