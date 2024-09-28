@@ -54,10 +54,8 @@ describe "Camion" {
   test "Transporte" {
     camion.cargar(knightRider)
     camion.cargar(bumblebee)
-    almacen.almacenar.add(arena)
+    almacen.stock().add(arena)
     camion.transportar(almacen, ruta9)
     assert.equals(#{knightRider,bumblebee}, camion.cosas())
   }
-
-
 }

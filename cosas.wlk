@@ -91,7 +91,6 @@ object residuosRadioactivos {
 
 class Embalaje {
 
-
 }
 object embalajeDeSeguridad {
 	var cosa = residuosRadioactivos
@@ -107,27 +106,34 @@ object embalajeDeSeguridad {
 
 object almacen {
 	const capMax = 3
-	const property almacenar = #{}
-	method descargo() {
-			
-			camion.descargar(cosas)
-			camion.cosas().clear()
+	const property stock = #{}
+
+	method descargo(camion) {
+			if(self.hayLugar(camion)) {
+				camion.cosas().forEach({cosa => self.descargarCamion(cosa)})
+				camion.cosas().clear()
+			}
 	}
 
-	method hayLugar() {
-		return self.almacenar().map{cosa => cosa.bulto()}.sum() < capMax 
-	}
-/*	method quedaUnLugar(){ */
-/*		return bodega.map{cosa => cosa.bulto()}.sum() == 2 */
-/*	} */
+	method descargarCamion(cosa) {
+		self.stock().add(cosa) }
+
+	method hayLugar(camion) {
+		//return self.stock().map{cosa => cosa.bulto()}.sum() <= 
+		return camion.cosas().map{cosa => cosa.bulto()}.sum() <= self.cantDisponibles() }
+
+	method cantDisponibles() {
+		return capMax - self.stock().size() }
+
 }
 
 object ruta9 {
-	// const pesoSoportado = 2500
-	method nivelDePeligrosidad(){return 11}  
+	method pesoSoportado() { return self.pesoMaximo()}
+	method nivelPeligrosidad(){return 11}  
+	method pesoMaximo() { return 2500 }
 }
 object caminosVecinales {
-	var property pesoSoportado = 2500
-
-	method nivDePeligrosidad(){ return 0}
+	method pesoSoportado() { return self.pesoMaximo()}
+	method nivelPeligrosidad(){ return 0}
+	method pesoMaximo() { return 2500 }
 }

@@ -73,8 +73,8 @@ Para que el transporte pueda ser realizado debe cumplirse con las siguientes con
 * El camión no tiene que estar excedido de peso
 
 * El almacén tiene una cantidad de bultos máximos que no puede superar. 
-Por ejemplo, si contiene arena a granel (1 bulto), el máximo de bultos del almacén se configura en 3, y el camión contiene a Bumblebee y Knight Rider 
-(3 bultos), entonces no se puede transportar.
+
+Por ejemplo, si contiene arena a granel (1 bulto), el máximo de bultos del almacén se configura en 3, y el camión contiene a Bumblebee y Knight Rider -(3 bultos), entonces no se puede transportar.
 
 * El camino soporte el viaje:
 	* El nivel de peligrosidad de la ruta 9 es 11,
